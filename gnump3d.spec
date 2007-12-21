@@ -17,6 +17,7 @@ Requires(preun):    rpm-helper
 Requires(pre):      rpm-helper
 Requires(preun):    rpm-helper
 BuildArch:	        noarch
+Buildroot:	        %{_tmppath}/%{name}-%{version}
 
 %description
 GNUMP3d is a streaming server for MP3's, OGG vorbis, and other
