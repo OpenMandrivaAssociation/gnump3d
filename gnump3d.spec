@@ -1,6 +1,6 @@
 %define name	gnump3d
 %define version	3.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:		        %{name}
 Version:	        %{version}
