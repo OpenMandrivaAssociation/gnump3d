@@ -7,7 +7,7 @@ Version:	        %{version}
 Release:	        %{release}
 License:	        GPL
 Group:		        System/Servers
-Summary:	        GNUMP3d is a streaming server for MP3's
+Summary:	        Streaming server for MP3's
 URL:		        http://www.gnu.org/software/gnump3d/
 Source0:	        http://savannah.gnu.org/download/gnump3d/%{name}-%{version}.tar.bz2
 Source1:	        gnump3d.init.bz2
