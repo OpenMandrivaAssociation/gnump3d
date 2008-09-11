@@ -1,6 +1,6 @@
 %define name	gnump3d
 %define version	3.0
-%define release %mkrel 4
+%define release %mkrel 5
 
 Name:		        %{name}
 Version:	        %{version}
@@ -10,8 +10,8 @@ Group:		        System/Servers
 Summary:	        Streaming server for MP3's
 URL:		        http://www.gnu.org/software/gnump3d/
 Source0:	        http://savannah.gnu.org/download/gnump3d/%{name}-%{version}.tar.bz2
-Source1:	        gnump3d.init.bz2
-Source2:	        gnump3d.logrotate.bz2
+Source1:	        gnump3d.init
+Patch0:             gnump3d-3.0-use-constant-libdir.patch
 Requires(post):     rpm-helper
 Requires(preun):    rpm-helper
 Requires(pre):      rpm-helper
@@ -29,14 +29,9 @@ streamable audio files, it is designed to be:
 
 %prep
 %setup -q
-bzcat %{SOURCE1} > %{name}.init
-bzcat %{SOURCE2} > %{name}.logrotate
+%patch -p 1 
 
-# fix locations...
-perl -pi \
-	-e 's|PLUGINDIR|%{perl_vendorlib}|;' \
-	-e 's|nobody|gnump3d|;' \
-	etc/gnump3d.conf
+chmod 644 lib/gnump3d/mp4info.pm
 
 %build
 
@@ -52,31 +47,43 @@ install -m 755 bin/gnump3d2 %{buildroot}%{_bindir}/gnump3d
 install -m 755 bin/gnump3d-top %{buildroot}%{_bindir}
 install -m 755 bin/gnump3d-index %{buildroot}%{_bindir}
 
-install -d -m 755 %{buildroot}%{_datadir}/%{name}
-cp -R templates/* %{buildroot}%{_datadir}/%{name}
-
 install -d -m 755 %{buildroot}%{_mandir}/man1
 install -m 644 man/gnump3d-top.1 %{buildroot}%{_mandir}/man1
 install -m 644 man/gnump3d-index.1 %{buildroot}%{_mandir}/man1
 install -m 644 man/gnump3d.1 %{buildroot}%{_mandir}/man1
 install -m 644 man/gnump3d.conf.1 %{buildroot}%{_mandir}/man1
 
-install -d -m 755 %{buildroot}%{perl_vendorlib}/%{name}
-install -d -m 755 %{buildroot}%{perl_vendorlib}/%{name}/plugins
-install -d -m 755 %{buildroot}%{perl_vendorlib}/%{name}/lang
-install -m 644 lib/gnump3d/*.pm %{buildroot}%{perl_vendorlib}/%{name}
-install -m 644 lib/gnump3d/plugins/*.pm %{buildroot}%{perl_vendorlib}/%{name}/plugins
-install -m 644 lib/gnump3d/lang/*.pm %{buildroot}%{perl_vendorlib}/%{name}/lang
+install -d -m 755 %{buildroot}%{_datadir}/%{name}/themes
+cp -R templates/* %{buildroot}%{_datadir}/%{name}/themes
+
+install -d -m 755 %{buildroot}%{_datadir}/%{name}/lib
+cp -R lib/* %{buildroot}%{_datadir}/%{name}/lib
 
 install -d -m 755 %{buildroot}%{_initrddir}
-install -m 755 %{name}.init %{buildroot}%{_initrddir}/%{name}
+install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 
 install -d -m 755 %{buildroot}%{_sysconfdir}/logrotate.d
-install -m 644 %{name}.logrotate %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
+cat > %{buildroot}%{_sysconfdir}/logrotate.d/%{name} <<EOF
+/var/log/gnump3d/access.log {
+    missingok
+    notifempty
+    nocompress
+    postrotate
+    /bin/kill -HUP `cat /var/run/gnump3d.pid 2> /dev/null` 2> /dev/null || true
+    endscript
+}
+EOF
 
 install -d -m 755 %{buildroot}/var/log/gnump3d
 install -d -m 755 %{buildroot}/var/cache/gnump3d
 install -d -m 755 %{buildroot}/var/cache/gnump3d/serving
+
+# fix locations...
+perl -pi \
+	-e 's|^theme_directory = .*|theme_directory = %{_datadir}/%{name}/themes|;' \
+	-e 's|^plugin_directory = .*|plugin_directory = %{_datadir}/%{name}/lib/gnump3d/plugins|;' \
+	-e 's|nobody|gnump3d|;' \
+	%{buildroot}%{_sysconfdir}/%{name}/gnump3d.conf
 
 %pre
 %_pre_useradd gnump3d /var/cache/gnump3d /bin/false
@@ -108,7 +115,6 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/%{name}/*
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/logrotate.d/gnump3d
 %{_bindir}/*
-%{perl_vendorlib}/%{name}
 %{_mandir}/man1/*
 %{_datadir}/gnump3d
 %dir %attr(-,gnump3d,gnump3d) /var/log/gnump3d
