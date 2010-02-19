@@ -29,11 +29,9 @@ streamable audio files, it is designed to be:
 
 %prep
 %setup -q
-%patch -p 1 
+%patch0 -p 1 
 
 chmod 644 lib/gnump3d/mp4info.pm
-
-%build
 
 %install
 rm -rf %{buildroot}
