@@ -1,0 +1,33 @@
+diff -Naur --exclude '*~' gnump3d-3.0/bin/gnump3d2 gnump3d-3.0-use-constant-libdir/bin/gnump3d2
+--- gnump3d-3.0/bin/gnump3d2	2007-10-18 19:34:02.000000000 +0200
++++ gnump3d-3.0-use-constant-libdir/bin/gnump3d2	2008-09-11 23:55:24.000000000 +0200
+@@ -70,6 +70,7 @@
+ use POSIX ":sys_wait_h";   # For reaping children.
+ BEGIN { POSIX::WNOHANG };
+ 
++use lib '/usr/share/gnump3d/lib';
+ use gnump3d::config;       # My configuration file reading module.
+ use gnump3d::files; 	   # My routines for working with files and dirs.
+ use gnump3d::filetypes;    # My routines for working with files types.
+diff -Naur --exclude '*~' gnump3d-3.0/bin/gnump3d-index gnump3d-3.0-use-constant-libdir/bin/gnump3d-index
+--- gnump3d-3.0/bin/gnump3d-index	2007-10-18 19:34:02.000000000 +0200
++++ gnump3d-3.0-use-constant-libdir/bin/gnump3d-index	2008-09-11 23:55:15.000000000 +0200
+@@ -122,6 +122,7 @@
+ #
+ # GNUMPd modules.
+ #
++use lib '/usr/share/gnump3d/lib';
+ use gnump3d::config;
+ use gnump3d::files;
+ use gnump3d::filetypes;
+diff -Naur --exclude '*~' gnump3d-3.0/bin/gnump3d-top gnump3d-3.0-use-constant-libdir/bin/gnump3d-top
+--- gnump3d-3.0/bin/gnump3d-top	2007-10-18 19:34:02.000000000 +0200
++++ gnump3d-3.0-use-constant-libdir/bin/gnump3d-top	2008-09-11 23:55:45.000000000 +0200
+@@ -80,6 +80,7 @@
+ #
+ #  Our modules.
+ #
++use '/usr/share/gnump3d/lib';
+ use gnump3d::files;
+ use gnump3d::filetypes;
+ 
