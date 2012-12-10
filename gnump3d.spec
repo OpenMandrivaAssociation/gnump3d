@@ -120,3 +120,98 @@ rm -rf %{buildroot}
 %dir %attr(-,gnump3d,gnump3d) /var/cache/gnump3d/serving
 
 
+
+
+%changelog
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 3.0-8mdv2011.0
++ Revision: 610955
+- rebuild
+
+* Fri Feb 19 2010 Funda Wang <fwang@mandriva.org> 3.0-7mdv2010.1
++ Revision: 508344
+- fix build
+
+* Tue Nov 11 2008 Olivier Thauvin <nanardon@mandriva.org> 3.0-7mdv2009.1
++ Revision: 302255
+- fix initscipt:
+  * pid option does not exists
+  * restart: do stop/start not start/stop
+
+* Tue Sep 16 2008 Guillaume Rousse <guillomovitch@mandriva.org> 3.0-6mdv2009.0
++ Revision: 285138
+- fix initscript and library search path in main programm
+
+* Fri Sep 12 2008 Guillaume Rousse <guillomovitch@mandriva.org> 3.0-5mdv2009.0
++ Revision: 283947
+- uncompress additional files
+- use herein documents instead of additional source whenever possible
+- LSB-compliant init script
+- setup libs in a constant directory, to avoid breakage on each update
+
+* Thu Jul 24 2008 Thierry Vignaud <tv@mandriva.org> 3.0-4mdv2009.0
++ Revision: 246497
+- rebuild
+
+* Mon Feb 18 2008 Thierry Vignaud <tv@mandriva.org> 3.0-2mdv2008.1
++ Revision: 170870
+- rebuild
+- fix "foobar is blabla" summary (=> "blabla") so that it looks nice in rpmdrake
+
+* Thu Jan 17 2008 Guillaume Rousse <guillomovitch@mandriva.org> 3.0-1mdv2008.1
++ Revision: 154207
+- update to new version 3.0
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Tue Dec 18 2007 Guillaume Rousse <guillomovitch@mandriva.org> 2.9.9.9-2mdv2008.1
++ Revision: 132438
+- rebuild
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+
+* Thu Dec 14 2006 Guillaume Rousse <guillomovitch@mandriva.org> 2.9.9.9-1mdv2007.0
++ Revision: 96790
+- new version
+
+* Wed Nov 15 2006 Olivier Blin <oblin@mandriva.com> 2.9.9-2mdv2007.1
++ Revision: 84512
+- add forgotten file.types by using a more general pattern
+- Import gnump3d
+
+* Wed Sep 06 2006 Guillaume Rousse <guillomovitch@mandriva.org> 2.9.9-1mdv2007.0
+- New version 2.9.9
+
+* Wed Aug 30 2006 Guillaume Rousse <guillomovitch@mandriva.org> 2.9.8-2mdv2007.0
+- Rebuild
+
+* Thu Nov 24 2005 Guillaume Rousse <guillomovitch@mandriva.org> 2.9.8-1mdk
+- 2.9.8
+
+* Tue Oct 18 2005 Olivier Thauvin <nanardon@mandriva.org> 2.9.5-1mdk
+- 2.9.5
+
+* Fri Jul 08 2005 Guillaume Rousse <guillomovitch@mandriva.org> 2.9.4-1mdk 
+- new version
+
+* Tue Jul 05 2005 Oden Eriksson <oeriksson@mandriva.com> 2.8-4mdk
+- rebuild
+- misc spec file fixes
+
+* Thu May 20 2004 Guillaume Rousse <guillomovitch@mandrake.org> 2.8-3mdk
+- fixed url (Eskild Hustvedt (Zero_Dogg) <eskild@mandrakehelp.com>)
+
+* Wed May 19 2004 Guillaume Rousse <guillomovitch@mandrake.org> 2.8-2mdk
+- remove mpg321 dependency
+- create various files at install
+
+* Wed May 19 2004 Guillaume Rousse <guillomovitch@mandrake.org> 2.8-1mdk
+- new release
+- spec cleanup
+
+* Mon May 17 2004 Oden Eriksson <oeriksson@mandrakesoft.com> 1.0-3mdk
+- build release
+- fix deps
+
