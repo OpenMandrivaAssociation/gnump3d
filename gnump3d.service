@@ -1,0 +1,14 @@
+[Unit]
+Description=gnump3d is a streaming mp3 daemon with a built in webserver.
+Requires=rpcbind.service
+After=syslog.target network.target rpcbind.service 
+
+[Service]
+Type=forking
+RemainAfterExit=yes
+EnvironmentFile=/etc/sysconfig/network
+EnvironmentFile=/etc/sysconfig/gnump3d
+ExecStart=/usr/bin/gnump3d
+
+[Install]
+WantedBy=multi-user.target
