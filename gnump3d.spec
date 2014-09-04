@@ -1,6 +1,6 @@
 Name:		        gnump3d
 Version:	        3.0
-Release:	        10
+Release:	        12
 License:	        GPL
 Group:		        System/Servers
 Summary:	        Streaming server for MP3's
@@ -81,7 +81,7 @@ perl -pi \
 %_pre_useradd gnump3d /var/cache/gnump3d /bin/false
 
 %post
-%_post_service gnump3d
+%systemd_post %{name}.service
 
 if [ $1 = 1 ]; then
   # create various files
@@ -91,10 +91,11 @@ if [ $1 = 1 ]; then
 fi
 
 %preun
-%_preun_service gnump3d
+%systemd_preun %{name}.service
 
 %postun
 %_postun_userdel gnump3d
+%systemd_postun_with_restart %{name}.service
 
 %clean
 
