@@ -1,6 +1,6 @@
 Name:		        gnump3d
 Version:	        3.0
-Release:	        12
+Release:	        13
 License:	        GPL
 Group:		        System/Servers
 Summary:	        Streaming server for MP3's
