@@ -4,7 +4,7 @@ Release:	        14
 License:	        GPL
 Group:		        System/Servers
 Summary:	        Streaming server for MP3's
-URL:		        http://www.gnu.org/software/gnump3d/
+URL:		        https://www.gnu.org/software/gnump3d/
 Source0:	        http://savannah.gnu.org/download/gnump3d/%{name}-%{version}.tar.bz2
 Source1:	        gnump3d.service
 Patch0:             gnump3d-3.0-use-constant-libdir.patch
